@@ -4,7 +4,7 @@
     <mat-toolbar color="primary">Cursos disponiveis</mat-toolbar>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content *ngIf="courses$ | async as courses">
 
     <!-- Table content -->
     <table mat-table [dataSource]="courses" class="mat-elevation-z8">
@@ -25,5 +25,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
+    <mat-spinner></mat-spinner>
   </mat-card-content>
 </mat-card>
