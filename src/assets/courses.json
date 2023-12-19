@@ -1,12 +1,17 @@
 [
   {
     "_id": "1",
-    "name": "Angular",
-    "category": "Front-end"
+    "name": "angular",
+    "category": "front-end"
   },
   {
     "_id": "2",
-    "name": "React",
-    "category": "Front-end"
+    "name": "react",
+    "category": "front-end"
+  },
+  {
+    "_id": "3",
+    "name": "java",
+    "category": "back-end"
   }
 ]
