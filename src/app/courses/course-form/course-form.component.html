@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-toolbar color="primary">Cadastro de curso</mat-toolbar>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form [formGroup]="form">
+      <mat-form-field class="full-width form">
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="Node.js" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Categoria</mat-label>
+        <input matInput placeholder="Back-end" formControlName="category">
+      </mat-form-field>
+    </form>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="primary" routerLink="/">Voltar</button>
+    <button mat-stroked-button color="primary">Cadastrar</button>
+  </mat-card-actions>
+</mat-card>

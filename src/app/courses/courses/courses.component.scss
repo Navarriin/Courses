@@ -1,10 +1,20 @@
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
-}
+mat-card {
+  width: 90%;
+  margin: 2rem auto;
 
-td {
-  text-transform: capitalize;
+  .table-content {
+    width: 90%;
+    margin: 1rem auto;
+  }
+
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+  }
+
+  td {
+    text-transform: capitalize;
+  }
 }
