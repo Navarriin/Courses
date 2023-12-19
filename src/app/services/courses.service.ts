@@ -7,12 +7,12 @@ import { Observable, first, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class CoursesService {
-  private readonly urlCourses = 'assets/courses.json';
+  private readonly urlCourses: string = 'api/courses';
 
-  constructor(private htpp: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   listAll(): Observable<Course[]> {
-    return this.htpp.get<Course[]>(this.urlCourses).pipe(
+    return this.http.get<Course[]>(this.urlCourses).pipe(
       // pipe = (cano), parecido com map.
       // take(1) => Para após uma chamada, se desinscrever.
       // delay(15000), Serve para dar um delay antes de pegar os dados (setTimeout)
