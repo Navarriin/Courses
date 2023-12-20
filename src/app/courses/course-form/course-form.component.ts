@@ -8,10 +8,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CourseFormComponent {
   form: FormGroup;
+
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       name: [null],
       category: [null],
     });
+  }
+
+  onSubmit(): void {
+    console.log(this.form.value);
   }
 }

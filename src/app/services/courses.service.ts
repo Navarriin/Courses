@@ -13,10 +13,10 @@ export class CoursesService {
 
   listAll(): Observable<Course[]> {
     return this.http.get<Course[]>(this.urlCourses).pipe(
+      first() // Para fazer uma só vez.
       // pipe = (cano), parecido com map.
       // take(1) => Para após uma chamada, se desinscrever.
       // delay(15000), Serve para dar um delay antes de pegar os dados (setTimeout)
-      first() // Para fazer uma só vez.
       // tap((courses) => console.log(courses))
     );
   }
