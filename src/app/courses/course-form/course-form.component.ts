@@ -2,7 +2,8 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoursesService } from '../../services/courses.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder } from '@angular/forms';
+import { Course } from '../models/course';
 
 @Component({
   selector: 'app-course-form',
@@ -10,19 +11,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './course-form.component.scss',
 })
 export class CourseFormComponent {
-  form: FormGroup;
+  form = this.formBuilder.group({
+    name: [''],
+    category: [''],
+  });
 
   constructor(
     private location: Location,
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder,
-    private coursesService: CoursesService
-  ) {
-    this.form = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.maxLength(150)]],
-      category: [null, Validators.required],
-    });
-  }
+    private coursesService: CoursesService,
+    private formBuilder: NonNullableFormBuilder
+  ) {}
 
   onSubmit(): void {
     // If para validação de form(de acordo com o formBuilder acima)
