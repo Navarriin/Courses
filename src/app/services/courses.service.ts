@@ -1,7 +1,7 @@
 import { Course } from '../courses/models/course';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, first, tap } from 'rxjs';
+import { Observable, first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +19,9 @@ export class CoursesService {
       // delay(15000), Serve para dar um delay antes de pegar os dados (setTimeout)
       // tap((courses) => console.log(courses))
     );
+  }
+
+  saveCourse(body: Course): Observable<Course> {
+    return this.http.post<Course>(this.urlCourses, body).pipe(first());
   }
 }
