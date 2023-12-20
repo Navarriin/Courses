@@ -1,5 +1,5 @@
 <!-- Table content -->
-<mat-table [dataSource]="courses" class="mat-elevation-z8">
+<mat-table [dataSource]="courses">
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
@@ -19,13 +19,13 @@
   <!-- Action Column -->
   <ng-container matColumnDef="action">
 
-    <mat-header-cell *matHeaderCellDef>
-      <button mat-mini-fab color="accent" aria-label="Adicionar curso" (click)="onAdd()">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-mini-fab color="accent" aria-label="Adicionar curso" (click)="onAdd()" class="action-column-header">
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>
 
-    <mat-cell *matCellDef="let element">
+    <mat-cell *matCellDef="let element" class="action-column">
       <button mat-icon-button color="primary" aria-label="Editar curso">
         <mat-icon>edit</mat-icon>
       </button>
@@ -39,4 +39,5 @@
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
 </mat-table>

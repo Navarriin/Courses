@@ -31,7 +31,6 @@ export class CoursesComponent {
       data: errorMsg,
     });
   }
-  ngOnInit(): void {}
 
   // faz a mesma coisa que o routerlink=""
   // onAdd(): void {
