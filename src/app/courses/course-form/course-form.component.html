@@ -8,16 +8,16 @@
     <form [formGroup]="form">
       <mat-form-field class="full-width form">
         <mat-label>Nome</mat-label>
-        <input matInput placeholder="Node.js" formControlName="name">
+        <input matInput #input placeholder="Node.js" formControlName="name">
+        <mat-hint align="end">{{input.value.length}}/150</mat-hint>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="category">
-          <mat-option value="null"> </mat-option>
+          <mat-option value=""> </mat-option>
           <mat-option value="front-end">Front end</mat-option>
           <mat-option value="back-end">Back end</mat-option>
-          <mat-option value="full-stack">FullStack</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -25,7 +25,7 @@
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-stroked-button color="primary" routerLink="/">Voltar</button>
+    <button mat-stroked-button color="primary" (click)="onCancel()">Voltar</button>
     <button mat-stroked-button color="primary" (click)="onSubmit()">Cadastrar</button>
   </mat-card-actions>
 </mat-card>
