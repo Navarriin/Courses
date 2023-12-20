@@ -1,8 +1,9 @@
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CoursesService } from '../../services/courses.service';
-import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
+import { CoursesService } from '../../../services/courses.service';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
 
 @Component({
@@ -14,7 +15,9 @@ export class CoursesComponent {
   courses$: Observable<Course[]>;
 
   constructor(
+    private router: Router, // => mesma funçao que o "routerlink="""
     public dialog: MatDialog,
+    private route: ActivatedRoute, // => pega o path da rota que esta no momento
     private coursesService: CoursesService
   ) {
     this.courses$ = this.coursesService.listAll().pipe(
@@ -33,7 +36,7 @@ export class CoursesComponent {
   }
 
   // faz a mesma coisa que o routerlink=""
-  // onAdd(): void {
-  //   this.router.navigate(['new'], { relativeTo: this.route });
-  // }
+  onAdd(): void {
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
 }

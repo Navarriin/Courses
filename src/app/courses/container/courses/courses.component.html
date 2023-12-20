@@ -3,7 +3,7 @@
   <mat-toolbar color="primary">Cursos disponiveis</mat-toolbar>
 
   <div class="mat-elevation-z8">
-    <app-courses-list *ngIf="courses$ | async as courses; else loading" [courses]="courses" />
+    <app-courses-list *ngIf="courses$ | async as courses; else loading" [courses]="courses" (add)="onAdd()" />
   </div>
 
   <ng-template #loading>
