@@ -21,6 +21,10 @@ export class CoursesService {
     return this.http.get<Course[]>(this.urlCourses).pipe(first(), delay(300));
   }
 
+  getById(id: string): Observable<Course> {
+    return this.http.get<Course>(`${this.urlCourses}/${id}`);
+  }
+
   saveCourse(body: Partial<Course>): Observable<Course> {
     return this.http.post<Course>(this.urlCourses, body).pipe(first());
   }

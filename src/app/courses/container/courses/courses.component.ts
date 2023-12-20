@@ -39,4 +39,8 @@ export class CoursesComponent {
   onAdd(): void {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
+
+  onEdit(body: Course): void {
+    this.router.navigate(['edit', body._id], { relativeTo: this.route });
+  }
 }
