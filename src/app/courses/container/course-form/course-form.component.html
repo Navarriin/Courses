@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-toolbar color="primary">Cadastro de curso</mat-toolbar>
+    <mat-toolbar color="primary">{{ form.value._id ? 'Editar Curso' : 'Cadastrar curso'}}</mat-toolbar>
   </mat-card-header>
 
   <mat-card-content>
@@ -26,6 +26,8 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-stroked-button color="primary" (click)="onCancel()">Voltar</button>
-    <button mat-stroked-button color="primary" (click)="onSubmit()">Cadastrar</button>
+    <button mat-stroked-button color="primary" (click)="onSubmit()">
+      {{ form.value._id ? 'Salvar' : 'Cadastrar'}}
+    </button>
   </mat-card-actions>
 </mat-card>

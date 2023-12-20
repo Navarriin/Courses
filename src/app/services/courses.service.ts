@@ -22,10 +22,27 @@ export class CoursesService {
   }
 
   getById(id: string): Observable<Course> {
-    return this.http.get<Course>(`${this.urlCourses}/${id}`);
+    return this.http.get<Course>(`${this.urlCourses}/${id}`).pipe(first());
   }
 
-  saveCourse(body: Partial<Course>): Observable<Course> {
+  sendData(body: Partial<Course>): Observable<Course> {
+    if (body._id) {
+      return this.editCourse(body);
+    }
+    return this.saveCourse(body);
+  }
+
+  private saveCourse(body: Partial<Course>): Observable<Course> {
     return this.http.post<Course>(this.urlCourses, body).pipe(first());
+  }
+
+  private editCourse(body: Partial<Course>): Observable<Course> {
+    return this.http
+      .put<Course>(`${this.urlCourses}/${body._id}`, body)
+      .pipe(first());
+  }
+
+  deleteCourse(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.urlCourses}/${id}`).pipe(first());
   }
 }
