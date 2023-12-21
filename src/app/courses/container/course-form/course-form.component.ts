@@ -14,10 +14,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 export class CourseFormComponent {
   form = this.formBuilder.group({
     _id: [''],
-    name: [
-      '',
-      [Validators.required, Validators.minLength(5), Validators.maxLength(150)],
-    ],
+    name: ['', [Validators.required, Validators.maxLength(150)]],
     category: ['', Validators.required],
   });
 
@@ -60,10 +57,6 @@ export class CourseFormComponent {
 
     if (field?.hasError('maxlength')) {
       return 'Limite de caracteres excedido';
-    }
-
-    if (field?.hasError('minlength')) {
-      return 'O campo precisa ter pelo menos 5 digitos';
     }
     return 'Campo inválido';
   }
