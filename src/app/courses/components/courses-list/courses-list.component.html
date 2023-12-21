@@ -8,9 +8,9 @@
   </ng-container>
 
   <!-- Category Column -->
-  <ng-container matColumnDef="category">
+  <ng-container matColumnDef="category" class="icon">
     <mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{ element.category }}
+    <mat-cell *matCellDef="let element" class="icon"> {{ element.category }}
       <mat-icon aria-hidden="false" aria-label="Example home icon"
         fontIcon="{{ element.category | category }}"></mat-icon>
     </mat-cell>

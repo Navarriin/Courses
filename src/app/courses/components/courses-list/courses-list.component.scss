@@ -5,6 +5,13 @@ mat-table {
   overflow: auto;
   max-height: 600px;
 
+  .icon {
+    display: flex;
+    gap: 0.6rem;
+    text-transform: capitalize;
+    margin-right: 0.4rem;
+  }
+
   .action-column {
     flex: 0 0 120px;
 
