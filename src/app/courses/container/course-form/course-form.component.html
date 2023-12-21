@@ -10,6 +10,10 @@
         <mat-label>Nome</mat-label>
         <input matInput #input placeholder="Node.js" formControlName="name">
         <mat-hint align="end">{{input.value.length}}/150</mat-hint>
+        @if (form.get('name')?.invalid) {
+        <mat-error>{{ getErrorMessage('name') }}</mat-error>
+        }
+
       </mat-form-field>
 
       <mat-form-field class="full-width">
@@ -20,6 +24,9 @@
           <mat-option value="back-end">Back end</mat-option>
           <mat-option value="full-stack">Full stack</mat-option>
         </mat-select>
+        @if (form.get('category')?.invalid) {
+        <mat-error>{{ getErrorMessage('category') }}</mat-error>
+        }
       </mat-form-field>
 
     </form>

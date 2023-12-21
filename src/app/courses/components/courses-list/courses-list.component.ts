@@ -33,7 +33,7 @@ export class CoursesListComponent {
   openDialog(body: Course): void {
     const dialogRef = this.dialog.open(AnimationDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) this.onDelete(body);
     });
   }

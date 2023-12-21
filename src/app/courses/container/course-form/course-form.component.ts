@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../../services/courses.service';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-form',
@@ -14,8 +14,11 @@ import { NonNullableFormBuilder } from '@angular/forms';
 export class CourseFormComponent {
   form = this.formBuilder.group({
     _id: [''],
-    name: [''],
-    category: [''],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(5), Validators.maxLength(150)],
+    ],
+    category: ['', Validators.required],
   });
 
   constructor(
@@ -40,13 +43,29 @@ export class CourseFormComponent {
     } else {
       this.form.markAllAsTouched();
       this.form.updateValueAndValidity();
-      this.onError();
     }
   }
 
   onCancel(): void {
     this.form.reset();
     this.location.back(); // Voltando para pagina anterior
+  }
+
+  getErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+
+    if (field?.hasError('required')) {
+      return 'Campo obrigatório';
+    }
+
+    if (field?.hasError('maxlength')) {
+      return 'Limite de caracteres excedido';
+    }
+
+    if (field?.hasError('minlength')) {
+      return 'O campo precisa ter pelo menos 5 digitos';
+    }
+    return 'Campo inválido';
   }
 
   private onSuccess(): void {
