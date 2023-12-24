@@ -31,7 +31,12 @@ export class CoursesListComponent {
   }
 
   openDialog(body: Course): void {
-    const dialogRef = this.dialog.open(AnimationDialogComponent);
+    const dialogRef = this.dialog.open(AnimationDialogComponent, {
+      data: {
+        title: 'Deseja deletar o curso?',
+        content: 'O curso será deletado permanentemente!',
+      },
+    });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) this.onDelete(body);

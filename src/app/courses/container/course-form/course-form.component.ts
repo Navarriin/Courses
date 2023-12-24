@@ -11,6 +11,8 @@ import {
   UntypedFormArray,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AnimationDialogComponent } from '../../../shared/components/animation-dialog/animation-dialog.component';
 
 @Component({
   selector: 'app-course-form',
@@ -21,6 +23,7 @@ export class CourseFormComponent {
   form!: FormGroup;
 
   constructor(
+    public dialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
@@ -55,13 +58,39 @@ export class CourseFormComponent {
   private createLesson(lesson: Lesson = { id: '', name: '', youtubeUrl: '' }) {
     return this.formBuilder.group({
       id: [lesson.id],
-      name: [lesson.name],
-      youtubeUrl: [lesson.youtubeUrl],
+      name: [lesson.name, [Validators.required, Validators.maxLength(100)]],
+      youtubeUrl: [
+        lesson.youtubeUrl,
+        [Validators.required, Validators.maxLength(20)],
+      ],
     });
   }
 
   getLessonsFormArray() {
     return (<UntypedFormArray>this.form.get('lesson')).controls;
+  }
+
+  addNewLesson(): void {
+    const lesson = this.form.get('lesson') as UntypedFormArray;
+    lesson.push(this.createLesson());
+  }
+
+  deleteLesson(index: number): void {
+    const lesson = this.form.get('lesson') as UntypedFormArray;
+    lesson.removeAt(index);
+  }
+
+  openDialog(index: number): void {
+    const dialogRef = this.dialog.open(AnimationDialogComponent, {
+      data: {
+        title: 'Deseja deletar a aula?',
+        content: 'A aula será deletada permanentemente!',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) this.deleteLesson(index);
+    });
   }
 
   onSubmit(): void {
