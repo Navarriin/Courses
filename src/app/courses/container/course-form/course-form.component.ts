@@ -1,11 +1,16 @@
+import { Lesson } from '../../models/lesson';
 import { Course } from '../../models/course';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../../services/courses.service';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Lesson } from '../../models/lesson';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  UntypedFormArray,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-course-form',
@@ -30,15 +35,15 @@ export class CourseFormComponent {
       _id: [course._id],
       name: [course.name, [Validators.required, Validators.maxLength(150)]],
       category: [course.category, Validators.required],
-      lessons: this.formBuilder.array(this.retrieveLessons(course)),
+      lesson: this.formBuilder.array(this.retrieveLessons(course)),
     });
   }
 
   private retrieveLessons(course: Course) {
     const lessons = [];
 
-    if (course?.lessons) {
-      course.lessons.forEach((lesson) =>
+    if (course?.lesson) {
+      course.lesson.forEach((lesson) =>
         lessons.push(this.createLesson(lesson))
       );
     } else {
@@ -53,6 +58,10 @@ export class CourseFormComponent {
       name: [lesson.name],
       youtubeUrl: [lesson.youtubeUrl],
     });
+  }
+
+  getLessonsFormArray() {
+    return (<UntypedFormArray>this.form.get('lesson')).controls;
   }
 
   onSubmit(): void {

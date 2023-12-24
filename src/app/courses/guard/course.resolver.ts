@@ -12,6 +12,6 @@ export const courseResolver: ResolveFn<Course> = (
   if (route.params?.['id']) {
     return service.getById(route.params?.['id']); // Se a rota tem parametro, retorna objeto com valor do id
   } else {
-    return of({ _id: '', name: '', category: '', lessons: [] }); // se a rota nao tem parametro, retorna objeto de Course vazio
+    return of({ _id: '', name: '', category: '', lesson: [] }); // se a rota nao tem parametro, retorna objeto de Course vazio
   }
 };

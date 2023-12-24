@@ -9,7 +9,7 @@
       <mat-form-field class="full-width form">
         <mat-label>Nome</mat-label>
         <input matInput #input placeholder="Node.js" formControlName="name">
-        <mat-hint align="end">{{input.value.length}}/150</mat-hint>
+        <mat-hint align="end">{{ input.value.length }}/150</mat-hint>
         @if (form.get('name')?.invalid) {
         <mat-error>{{ getErrorMessage('name') }}</mat-error>
         }
@@ -29,9 +29,37 @@
         }
       </mat-form-field>
 
+      <mat-toolbar>
+        <span>Aulas</span>
+        <button type="button" mat-icon-button color="accent">
+          <mat-icon aria-label="Botao de adicionar aula">add</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <table style="width: 100%;" formArrayName="lesson" *ngFor="let lesson of getLessonsFormArray(); let i = index">
+        <tr [formGroupName]="i">
+          <td style="width: 65%;">
+            <mat-form-field class="full-width">
+              <mat-label>Nome da aula</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+          </td>
+          <td style="width: 30%;">
+            <mat-form-field class="full-width">
+              <mat-label>URL</mat-label>
+              <span matPrefix>https://youtu.br/</span>
+              <input matInput formControlName="youtubeUrl">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
     </form>
 
+
+
   </mat-card-content>
+
   <mat-card-actions>
     <button mat-stroked-button color="accent" (click)="onCancel()">Voltar</button>
     <button mat-stroked-button color="accent" (click)="onSubmit()">
