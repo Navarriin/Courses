@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../../services/courses.service';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Lesson } from '../../models/lesson';
 
 @Component({
   selector: 'app-course-form',
@@ -12,11 +13,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
   styleUrl: './course-form.component.scss',
 })
 export class CourseFormComponent {
-  form = this.formBuilder.group({
-    _id: [''],
-    name: ['', [Validators.required, Validators.maxLength(150)]],
-    category: ['', Validators.required],
-  });
+  form!: FormGroup;
 
   constructor(
     private location: Location,
@@ -28,7 +25,34 @@ export class CourseFormComponent {
 
   ngOnInit(): void {
     const course: Course = this.route.snapshot.data['course']; // Pegando os parametros da url de acordo com o Resolver criado
-    this.form.patchValue(course);
+
+    this.form = this.formBuilder.group({
+      _id: [course._id],
+      name: [course.name, [Validators.required, Validators.maxLength(150)]],
+      category: [course.category, Validators.required],
+      lessons: this.formBuilder.array(this.retrieveLessons(course)),
+    });
+  }
+
+  private retrieveLessons(course: Course) {
+    const lessons = [];
+
+    if (course?.lessons) {
+      course.lessons.forEach((lesson) =>
+        lessons.push(this.createLesson(lesson))
+      );
+    } else {
+      lessons.push(this.createLesson());
+    }
+    return lessons;
+  }
+
+  private createLesson(lesson: Lesson = { id: '', name: '', youtubeUrl: '' }) {
+    return this.formBuilder.group({
+      id: [lesson.id],
+      name: [lesson.name],
+      youtubeUrl: [lesson.youtubeUrl],
+    });
   }
 
   onSubmit(): void {
@@ -71,7 +95,7 @@ export class CourseFormComponent {
     }
 
     this.snackBar.open(`${message}`, 'X', { duration: 3000 });
-    setTimeout(() => this.onCancel(), 500);
+    setTimeout(() => this.onCancel(), 300);
   }
 
   private onError(): void {

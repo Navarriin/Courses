@@ -7,5 +7,8 @@ import { Component, Inject } from '@angular/core';
   styleUrl: './error-dialog.component.scss',
 })
 export class ErrorDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public error: string) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public error: string
+  ) {}
 }
