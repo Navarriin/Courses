@@ -1,4 +1,4 @@
-import { Course } from '../courses/models/course';
+import { Course } from '../../courses/models/course';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, first } from 'rxjs';

@@ -4,15 +4,14 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { CoursesService } from '../../../services/courses.service';
+import { CoursesService } from '../../../services/courses/courses.service';
 import {
   FormGroup,
   NonNullableFormBuilder,
   UntypedFormArray,
   Validators,
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { AnimationDialogComponent } from '../../../shared/components/animation-dialog/animation-dialog.component';
+import { FormUtilsService } from '../../../services/utils/utils.service';
 
 @Component({
   selector: 'app-course-form',
@@ -23,10 +22,10 @@ export class CourseFormComponent {
   form!: FormGroup;
 
   constructor(
-    public dialog: MatDialog,
     private location: Location,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
+    public formUtils: FormUtilsService,
     private coursesService: CoursesService,
     private formBuilder: NonNullableFormBuilder
   ) {}
@@ -38,7 +37,10 @@ export class CourseFormComponent {
       _id: [course._id],
       name: [course.name, [Validators.required, Validators.maxLength(150)]],
       category: [course.category, Validators.required],
-      lesson: this.formBuilder.array(this.retrieveLessons(course)),
+      lesson: this.formBuilder.array(
+        this.retrieveLessons(course),
+        Validators.required
+      ),
     });
   }
 
@@ -80,19 +82,6 @@ export class CourseFormComponent {
     lesson.removeAt(index);
   }
 
-  openDialog(index: number): void {
-    const dialogRef = this.dialog.open(AnimationDialogComponent, {
-      data: {
-        title: 'Deseja deletar a aula?',
-        content: 'A aula será deletada permanentemente!',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) this.deleteLesson(index);
-    });
-  }
-
   onSubmit(): void {
     if (this.form.valid) {
       this.coursesService.sendData(this.form.value).subscribe({
@@ -100,8 +89,7 @@ export class CourseFormComponent {
         error: () => this.onError(),
       });
     } else {
-      this.form.markAllAsTouched();
-      this.form.updateValueAndValidity();
+      this.formUtils.validateAllFormsFields(this.form);
     }
   }
 
@@ -110,21 +98,20 @@ export class CourseFormComponent {
     this.location.back(); // Voltando para pagina anterior
   }
 
-  getErrorMessage(fieldName: string) {
-    const field = this.form.get(fieldName);
-
-    if (field?.hasError('required')) {
-      return 'Campo obrigatório';
-    }
-
-    if (field?.hasError('maxlength')) {
-      return 'Limite de caracteres excedido';
-    }
-    return 'Campo inválido';
+  openDialog(index: number): void {
+    const dialog = this.formUtils.openDialog(
+      'Deseja deletar a aula?',
+      'A aula será deletada permanentemente!'
+    );
+    dialog.subscribe((result: boolean) => {
+      if (result) {
+        this.deleteLesson(index);
+      }
+    });
   }
 
   private onSuccess(): void {
-    let message!: string;
+    let message: string;
 
     if (this.form.value._id) {
       message = 'Curso editado com sucesso!';

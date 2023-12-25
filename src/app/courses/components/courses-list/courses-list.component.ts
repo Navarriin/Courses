@@ -2,6 +2,7 @@ import { Course } from '../../models/course';
 import { MatDialog } from '@angular/material/dialog';
 import { AnimationDialogComponent } from '../../../shared/components/animation-dialog/animation-dialog.component';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormUtilsService } from '../../../services/utils/utils.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -16,7 +17,7 @@ export class CoursesListComponent {
   @Output() edit = new EventEmitter(false);
   @Output() delete = new EventEmitter(false);
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public formUtils: FormUtilsService) {}
 
   onAdd(): void {
     this.add.emit(true);
@@ -31,15 +32,14 @@ export class CoursesListComponent {
   }
 
   openDialog(body: Course): void {
-    const dialogRef = this.dialog.open(AnimationDialogComponent, {
-      data: {
-        title: 'Deseja deletar o curso?',
-        content: 'O curso será deletado permanentemente!',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) this.onDelete(body);
+    const dialog = this.formUtils.openDialog(
+      'Deseja deletar o curso?',
+      'O curso será deletado permanentemente!'
+    );
+    dialog.subscribe((result: boolean) => {
+      if (result) {
+        this.onDelete(body);
+      }
     });
   }
 }

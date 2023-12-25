@@ -2,7 +2,7 @@ import { of } from 'rxjs';
 import { inject } from '@angular/core';
 import { Course } from '../models/course';
 import { ResolveFn } from '@angular/router';
-import { CoursesService } from '../../services/courses.service';
+import { CoursesService } from '../../services/courses/courses.service';
 
 export const courseResolver: ResolveFn<Course> = (
   route,

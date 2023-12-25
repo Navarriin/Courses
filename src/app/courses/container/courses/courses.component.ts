@@ -2,7 +2,7 @@ import { Course } from '../../models/course';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CoursesService } from '../../../services/courses.service';
+import { CoursesService } from '../../../services/courses/courses.service';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
