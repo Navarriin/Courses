@@ -1,11 +1,13 @@
 import { Course } from '../../models/course';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoursesService } from '../../../services/courses/courses.service';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
+import { CoursePage } from '../../models/course-page';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-courses',
@@ -13,7 +15,12 @@ import { Observable, catchError, of } from 'rxjs';
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
-  courses$: Observable<Course[]> | null = null;
+  courses$: Observable<CoursePage> | null = null;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  pageIndex: number = 0;
+  pageSize: number = 10;
 
   constructor(
     private router: Router, // => mesma funçao que o "routerlink="""
@@ -25,14 +32,22 @@ export class CoursesComponent {
     this.loadingCourses();
   }
 
-  loadingCourses(): void {
-    this.courses$ = this.coursesService.listAll().pipe(
-      catchError(() => {
-        // cathError espera um return de observable do erro
-        this.onError('Erro ao Carregar dados');
-        return of([]); // of tambem é um metodo do rxjs
-      })
-    );
+  loadingCourses(
+    pageEvent: PageEvent = { length: 0, pageIndex: 0, pageSize: 10 }
+  ) {
+    this.courses$ = this.coursesService
+      .listAll(pageEvent.pageIndex, pageEvent.pageSize)
+      .pipe(
+        tap(() => {
+          this.pageIndex = pageEvent.pageIndex;
+          this.pageSize = pageEvent.pageSize;
+        }),
+        catchError(() => {
+          // cathError espera um return de observable do erro
+          this.onError('Erro ao Carregar dados');
+          return of({ courses: [], totalElements: 0, totalPages: 0 }); // of tambem é um metodo do rxjs
+        })
+      );
   }
 
   onError(errorMsg: string) {

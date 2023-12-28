@@ -1,8 +1,6 @@
 import { Course } from '../../models/course';
-import { MatDialog } from '@angular/material/dialog';
-import { AnimationDialogComponent } from '../../../shared/components/animation-dialog/animation-dialog.component';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormUtilsService } from '../../../services/utils/utils.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-courses-list',

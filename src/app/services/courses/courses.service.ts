@@ -2,6 +2,7 @@ import { Course } from '../../courses/models/course';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, first } from 'rxjs';
+import { CoursePage } from '../../courses/models/course-page';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,10 @@ export class CoursesService {
   // first() => faz uma so vez(mesma coisa que o take(1))
   // delay(15000), Serve para dar um delay antes de pegar os dados (setTimeout)
 
-  listAll(): Observable<Course[]> {
-    return this.http.get<Course[]>(this.urlCourses).pipe(first(), delay(300));
+  listAll(pageNumber = 0, pageSize = 10): Observable<CoursePage> {
+    return this.http
+      .get<CoursePage>(this.urlCourses, { params: { pageNumber, pageSize } })
+      .pipe(first(), delay(150));
   }
 
   getById(id: string): Observable<Course> {
