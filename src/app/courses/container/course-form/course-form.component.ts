@@ -5,7 +5,13 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../../services/courses/courses.service';
-import { FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  UntypedFormArray,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { FormUtilsService } from '../../../services/utils/utils.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,22 +23,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-    selector: 'app-course-form',
-    templateUrl: './course-form.component.html',
-    styleUrl: './course-form.component.scss',
-    standalone: true,
-    imports: [
-        MatCardModule,
-        MatToolbarModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatButtonModule,
-        MatIconModule,
-        NgFor,
-    ],
+  selector: 'app-course-form',
+  templateUrl: './course-form.component.html',
+  styleUrl: './course-form.component.scss',
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
+    MatIconModule,
+    NgFor,
+  ],
 })
 export class CourseFormComponent {
   form!: FormGroup;
@@ -110,8 +116,16 @@ export class CourseFormComponent {
   }
 
   onCancel(): void {
-    this.form.reset();
-    this.location.back(); // Voltando para pagina anterior
+    const dialog = this.formUtils.openDialog(
+      'Deseja voltar?',
+      'Todos dados não salvos serão perdidos!'
+    );
+    dialog.subscribe((result) => {
+      if (result) {
+        this.form.reset();
+        this.location.back(); // Voltando para pagina anterior
+      }
+    });
   }
 
   openDialog(index: number): void {
