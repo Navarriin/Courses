@@ -6,7 +6,7 @@
   <div class="mat-elevation-z8" *ngIf="courses$ | async as courses; else loading">
     <app-courses-list [courses]="courses.courses" (add)="onAdd()" (edit)="onEdit($event)" (delete)="onDelete($event)" />
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 15]" [pageIndex]="pageIndex" [pageSize]="pageSize"
+    <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 15]" [pageIndex]="pageIndex" [pageSize]="pageSize"
       [length]="courses.totalElements" (page)="loadingCourses($event)" showFirstLastButtons
       aria-label="Select page of courses">
     </mat-paginator>
