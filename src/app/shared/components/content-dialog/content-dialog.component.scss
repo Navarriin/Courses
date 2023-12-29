@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+      font-weight: bold;
+    }
+
+    p {
+      text-transform: capitalize;
+    }
+
+    ul {
+      list-style: none;
+    }
+  }
+  button {
+    margin-bottom: 1rem;
+  }
+}

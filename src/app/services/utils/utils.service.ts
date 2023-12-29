@@ -7,6 +7,8 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms';
+import { Course } from '../../courses/models/course';
+import { ContentDialogComponent } from '../../shared/components/content-dialog/content-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -71,6 +73,18 @@ export class FormUtilsService {
       data: {
         title: title,
         content: content,
+      },
+    });
+    return dialogRef.afterClosed();
+  }
+
+  openContent(element: Course) {
+    const dialogRef = this.dialog.open(ContentDialogComponent, {
+      data: {
+        _id: element._id,
+        name: element.name,
+        category: element.category,
+        lesson: element.lesson,
       },
     });
     return dialogRef.afterClosed();

@@ -2,6 +2,11 @@ mat-table {
   display: flex;
   flex-direction: column;
 
+  .nameAndIcons {
+    display: flex;
+    gap: 0.6rem;
+  }
+
   .icon {
     display: flex;
     gap: 0.6rem;

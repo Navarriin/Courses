@@ -4,7 +4,13 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Nome do curso </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+
+    <mat-cell *matCellDef="let element" class="nameAndIcons">
+      <button mat-icon-button color="accent" aria-label=" abrir dados do curso" (click)="openData(element)">
+        <mat-icon>description</mat-icon>
+      </button>
+      {{ element.name }}
+    </mat-cell>
   </ng-container>
 
   <!-- Category Column -->

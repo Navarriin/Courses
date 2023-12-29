@@ -35,6 +35,10 @@ export class CoursesListComponent {
     this.delete.emit(body);
   }
 
+  openData(element: Course) {
+    this.formUtils.openContent(element);
+  }
+
   openDialog(body: Course): void {
     const dialog = this.formUtils.openDialog(
       'Deseja deletar o curso?',
