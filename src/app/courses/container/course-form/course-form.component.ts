@@ -116,15 +116,16 @@ export class CourseFormComponent {
   }
 
   onCancel(): void {
+    this.location.back(); // Voltando para pagina anterior
+  }
+
+  confirmReturn(): void {
     const dialog = this.formUtils.openDialog(
       'Deseja voltar?',
       'Todos dados não salvos serão perdidos!'
     );
-    dialog.subscribe((result) => {
-      if (result) {
-        this.form.reset();
-        this.location.back(); // Voltando para pagina anterior
-      }
+    dialog.subscribe((result: boolean) => {
+      if (result) this.onCancel();
     });
   }
 
