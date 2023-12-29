@@ -1,10 +1,19 @@
 import { Lesson } from '../../models/lesson';
 import { Course } from '../../models/course';
-import { Location, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
 import { CoursesService } from '../../../services/courses/courses.service';
+import { MatButtonModule } from '@angular/material/button';
+import { Location, NgFor } from '@angular/common';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { FormUtilsService } from '../../../services/utils/utils.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormGroup,
   NonNullableFormBuilder,
@@ -12,15 +21,6 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { FormUtilsService } from '../../../services/utils/utils.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatOptionModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-course-form',
@@ -28,16 +28,16 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './course-form.component.scss',
   standalone: true,
   imports: [
+    NgFor,
+    MatIconModule,
     MatCardModule,
-    MatToolbarModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
     MatButtonModule,
-    MatIconModule,
-    NgFor,
+    MatToolbarModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
 })
 export class CourseFormComponent {
@@ -135,9 +135,7 @@ export class CourseFormComponent {
       'A aula será deletada permanentemente!'
     );
     dialog.subscribe((result: boolean) => {
-      if (result) {
-        this.deleteLesson(index);
-      }
+      if (result) this.deleteLesson(index);
     });
   }
 

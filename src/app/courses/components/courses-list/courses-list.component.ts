@@ -1,22 +1,17 @@
 import { Course } from '../../models/course';
-import { FormUtilsService } from '../../../services/utils/utils.service';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { FormUtilsService } from '../../../services/utils/utils.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-courses-list',
-    templateUrl: './courses-list.component.html',
-    styleUrl: './courses-list.component.scss',
-    standalone: true,
-    imports: [
-        MatTableModule,
-        MatIconModule,
-        MatButtonModule,
-        CategoryPipe,
-    ],
+  selector: 'app-courses-list',
+  templateUrl: './courses-list.component.html',
+  styleUrl: './courses-list.component.scss',
+  standalone: true,
+  imports: [MatTableModule, MatIconModule, MatButtonModule, CategoryPipe],
 })
 export class CoursesListComponent {
   readonly displayedColumns: string[] = ['name', 'category', 'action'];

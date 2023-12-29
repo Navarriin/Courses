@@ -1,33 +1,37 @@
 import { Course } from '../../models/course';
-import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CoursesService } from '../../../services/courses/courses.service';
-import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, of, tap } from 'rxjs';
 import { CoursePage } from '../../models/course-page';
-import { MatPaginator, PageEvent, MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CoursesListComponent } from '../../components/courses-list/courses-list.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { CoursesService } from '../../../services/courses/courses.service';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { Component, ViewChild } from '@angular/core';
+import { CoursesListComponent } from '../../components/courses-list/courses-list.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Observable, catchError, of, tap } from 'rxjs';
+import {
+  MatPaginator,
+  PageEvent,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 
 @Component({
-    selector: 'app-courses',
-    templateUrl: './courses.component.html',
-    styleUrl: './courses.component.scss',
-    standalone: true,
-    imports: [
-        MatCardModule,
-        MatToolbarModule,
-        NgIf,
-        CoursesListComponent,
-        MatPaginatorModule,
-        MatProgressSpinnerModule,
-        AsyncPipe,
-    ],
+  selector: 'app-courses',
+  templateUrl: './courses.component.html',
+  styleUrl: './courses.component.scss',
+  standalone: true,
+  imports: [
+    NgIf,
+    AsyncPipe,
+    MatCardModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    CoursesListComponent,
+    MatProgressSpinnerModule,
+  ],
 })
 export class CoursesComponent {
   courses$: Observable<CoursePage> | null = null;

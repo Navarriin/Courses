@@ -1,8 +1,8 @@
 import { Course } from '../../courses/models/course';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, delay, first } from 'rxjs';
 import { CoursePage } from '../../courses/models/course-page';
+import { Observable, delay, first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
