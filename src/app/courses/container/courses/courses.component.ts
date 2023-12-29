@@ -1,10 +1,10 @@
 import { Course } from '../../models/course';
+import { AsyncPipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursePage } from '../../models/course-page';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { CoursesService } from '../../../services/courses/courses.service';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Component, ViewChild } from '@angular/core';
@@ -24,7 +24,6 @@ import {
   styleUrl: './courses.component.scss',
   standalone: true,
   imports: [
-    NgIf,
     AsyncPipe,
     MatCardModule,
     MatToolbarModule,

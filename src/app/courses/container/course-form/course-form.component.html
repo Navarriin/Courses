@@ -11,7 +11,7 @@
         <input matInput #input placeholder="Node.js" formControlName="name">
         <mat-hint align="end">{{ input.value.length }}/150</mat-hint>
         @if (form.get('name')?.invalid) {
-        <mat-error>{{ formUtils.getErrorMessage(form, 'name') }}</mat-error>
+          <mat-error>{{ formUtils.getErrorMessage(form, 'name') }}</mat-error>
         }
 
       </mat-form-field>
@@ -25,7 +25,7 @@
           <mat-option value="full-stack">Full stack</mat-option>
         </mat-select>
         @if (form.get('category')?.invalid) {
-        <mat-error>{{ formUtils.getErrorMessage(form, 'category') }}</mat-error>
+          <mat-error>{{ formUtils.getErrorMessage(form, 'category') }}</mat-error>
         }
       </mat-form-field>
 
@@ -36,40 +36,42 @@
         </button>
       </mat-toolbar>
       @if (formUtils.isFormArrayRequired(form, 'lesson')) {
-      <mat-error>Adicione pelo menos uma aula</mat-error>
+        <mat-error>Adicione pelo menos uma aula</mat-error>
       }
 
-      <table style="width: 100%;" formArrayName="lesson" *ngFor="let lesson of getLessonsFormArray(); let i = index">
-        <tr [formGroupName]="i">
-          <td style="width: 65%;">
-            <mat-form-field class="full-width">
-              <mat-label>Nome da aula</mat-label>
-              <input matInput formControlName="name">
-              @if (getLessonsFormArray()[i].get('name')?.invalid) {
-              <mat-error>
-                {{ formUtils.getFormArrayFieldErrorMessage(form, 'lesson', 'name', i) }}
-              </mat-error>
-              }
-            </mat-form-field>
-          </td>
-          <td style="width: 30%;">
-            <mat-form-field class="full-width">
-              <span matPrefix>https://youtu.br/</span>
-              <input matInput formControlName="youtubeUrl">
-              @if (getLessonsFormArray()[i].get('youtubeUrl')?.invalid) {
-              <mat-error>
-                {{ formUtils.getFormArrayFieldErrorMessage(form, 'lesson', 'youtubeUrl', i) }}
-              </mat-error>
-              }
-            </mat-form-field>
-          </td>
-          <td>
-            <button type="button" mat-icon-button color="warn" (click)="openDialog(i)">
-              <mat-icon aria-label="Botao de deletar aula">delete</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </table>
+      @for (lesson of getLessonsFormArray(); track lesson; let i = $index) {
+        <table style="width: 100%;" formArrayName="lesson">
+          <tr [formGroupName]="i">
+            <td style="width: 65%;">
+              <mat-form-field class="full-width">
+                <mat-label>Nome da aula</mat-label>
+                <input matInput formControlName="name">
+                @if (getLessonsFormArray()[i].get('name')?.invalid) {
+                  <mat-error>
+                    {{ formUtils.getFormArrayFieldErrorMessage(form, 'lesson', 'name', i) }}
+                  </mat-error>
+                }
+              </mat-form-field>
+            </td>
+            <td style="width: 30%;">
+              <mat-form-field class="full-width">
+                <span matPrefix>https://youtu.br/</span>
+                <input matInput formControlName="youtubeUrl">
+                @if (getLessonsFormArray()[i].get('youtubeUrl')?.invalid) {
+                  <mat-error>
+                    {{ formUtils.getFormArrayFieldErrorMessage(form, 'lesson', 'youtubeUrl', i) }}
+                  </mat-error>
+                }
+              </mat-form-field>
+            </td>
+            <td>
+              <button type="button" mat-icon-button color="warn" (click)="openDialog(i)">
+                <mat-icon aria-label="Botao de deletar aula">delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </table>
+      }
 
     </form>
 
