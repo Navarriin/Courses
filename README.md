@@ -1,27 +1,34 @@
-# Crud
+# Cursos - Gabriel Navarro
+![Static Badge](https://img.shields.io/badge/TypeScript-blue)
+![Static Badge](https://img.shields.io/badge/Angular-blue)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.1.
+![Captura de tela 2024-01-05 173334](https://github.com/Navarriin/Courses/assets/139160874/f5700870-16ab-479b-a82d-6df94a89f81d)
+![Captura de tela 2024-01-05 172344](https://github.com/Navarriin/Courses/assets/139160874/2de4c4d0-3c1c-4edf-a8a2-819fa8ce53ac)
+![Captura de tela 2024-01-05 172357](https://github.com/Navarriin/Courses/assets/139160874/5784a3de-a874-4760-a811-1b916c01fe32)
 
-## Development server
+## :smile: Descrição
+Projeto onde você consegue cadastrar, editar e deletar cursos, onde em 1 curso você consegue adicionar, editar e deletar quantas aulas quiser.
+Projeto feito em Angular com varias validaçoes e mensagens de segurança.
+Com pageamento :D
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Segue o Link do repositorio da API    
+https://github.com/Navarriin/API_Courses   
 
-## Code scaffolding
+#### OBS: subir a API na porta -> http://localhost:8080/
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## :pushpin: Como utilizar 
+### 1. Clone o repositório
+```
+git clone https://github.com/Navarriin/Courses
+```
+### 2. Instale as dependencias
+```
+npm install
+```
 
-## Build
+### 3. Starte a aplicação
+```
+npm run start
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Após realizar esta sequência de passos a aplicação já estará pronta para ser utilizada na porta -> http://localhost:4200/
